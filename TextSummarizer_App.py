@@ -8,7 +8,7 @@ st.write("Summarize long text into concise highlights using Hugging Face Transfo
 # Load model once
 @st.cache_resource
 def load_model():
-    return pipeline("summarization", model="facebook/bart-large-cnn")
+    return pipeline("summarization", model="google/pegasus-xsum") #model="facebook/bart-large-cnn"
 
 summarizer = load_model()
 

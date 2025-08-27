@@ -1,38 +1,13 @@
 import streamlit as st
-from transformers import pipeline
+import socket
+import os
 
-# Title
-st.title("😊 Sentiment Analysis App")
-st.write("Classify text as Positive, Negative, or Neutral using Hugging Face Transformers.")
+st.set_page_config(page_title="Azure Streamlit Demo")
 
-# Load model once
-@st.cache_resource
-def load_model():
-    return pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment") #for +ve or -ve = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
+st.title("🚀 Streamlit on Azure App Service")
+st.write("If you can see this, your app is running correctly on Azure! 🎉")
 
-analyzer = load_model()
-
-# User input
-text = st.text_area("Enter text to analyze sentiment:", height=150)
-
-# Analyze button
-if st.button("Analyze Sentiment"):
-    if text.strip():
-        with st.spinner("Analyzing..."):
-            result = analyzer(text)[0]
-            label = result['label']
-            score = round(result['score'], 3)
-
-            st.subheader("📌 Sentiment Result")
-            #st.write(f"**Label:** {label}") # to find the label
-            st.write(f"**Confidence:** {score}")
-            
-            # Add emoji indicator
-            if label == "LABEL_2":
-                st.success("😀 Positive Sentiment")
-            elif label == "LABEL_0":
-                st.error("😞 Negative Sentiment")
-            else:
-                st.info("😐 Neutral Sentiment")
-    else:
-        st.warning("Please enter some text to analyze.")
+# Show some debug info
+st.subheader("Environment Info")
+st.write("Assigned PORT:", os.getenv("PORT", "Not set"))
+st.write("Hostname:", socket.gethostname())

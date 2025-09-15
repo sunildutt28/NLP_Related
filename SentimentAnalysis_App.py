@@ -33,6 +33,6 @@ if st.button("Analyze Sentiment"):
             elif label == "LABEL_0":
                 st.error("😞 Negative Sentiment")
             else:
-                st.info("😐 Neutral Sentiment")
+                st.info("😐 Neutral Sentiment !")
     else:
         st.warning("Please enter some text to analyze.")
